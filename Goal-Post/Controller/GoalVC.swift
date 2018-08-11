@@ -7,22 +7,41 @@
 //
 
 import UIKit
+import CoreData
 
-class GoalVC: UIViewController {
+class GoalVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var goalMessageView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        setUpView()
     }
 
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "GoalPostCell", for: indexPath) as? GoalCell{
+            return cell
+        }
+        return GoalCell()
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    private func setUpView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
+    }
+    
     @IBAction func createGoalPost(_ sender: Any) {
         
     }

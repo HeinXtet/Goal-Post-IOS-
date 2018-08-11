@@ -46,7 +46,6 @@
                                         <state key="normal" image="addGoal"/>
                                         <connections>
                                             <action selector="createGoalPost:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k58-g0-BZu"/>
-                                            <segue destination="Fcz-jT-lHb" kind="presentation" id="MYo-ec-68H"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -150,6 +149,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="goalLable" destination="7SD-Rs-acJ" id="eMp-ze-bpt"/>
+                                            <outlet property="goalProgress" destination="S5h-Jk-1aG" id="TKD-us-lgh"/>
+                                            <outlet property="goalType" destination="LAV-a6-u82" id="4IA-kU-5Tp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -249,7 +250,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbb-MW-7Ki">
                                         <rect key="frame" x="0.0" y="0.0" width="166.5" height="40"/>
-                                        <color key="backgroundColor" red="0.45085787770000002" green="0.82899305560000003" blue="0.83763033149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.69411764705882351" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="5It-V3-wjV"/>
                                         </constraints>
@@ -262,7 +263,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7e-J5-xv7">
                                         <rect key="frame" x="176.5" y="0.0" width="166.5" height="40"/>
-                                        <color key="backgroundColor" red="0.45085787770000002" green="0.82899305560000003" blue="0.83763033149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.45098039215686275" green="0.82745098039215681" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Short Term">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>

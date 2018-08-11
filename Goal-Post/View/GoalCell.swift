@@ -24,7 +24,9 @@ class GoalCell: UITableViewCell {
     
     
     func updateCell(goal : Goal) {
-        
+        self.goalLable.text = goal.goalDescription
+        self.goalProgress.text = String(goal.goalTatalProgress)
+        self.goalType.text = goal.goalType
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

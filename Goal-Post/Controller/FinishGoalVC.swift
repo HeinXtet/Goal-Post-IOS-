@@ -8,8 +8,11 @@
 
 import UIKit
 
-class FinishGoalVC: UIViewController {
 
+class FinishGoalVC: UIViewController {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+
+    
     @IBOutlet weak var goalPointField: UITextField!
     private var goalType = ""
    private var goalDescription  = ""
@@ -28,10 +31,34 @@ class FinishGoalVC: UIViewController {
     }
     
     @IBAction func backPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nild)
-        
+        self.dissmissVC()
     }
     
     @IBAction func finishGoalVC(_ sender: Any) {
+        addGoal { (isSuccess) in
+            print("isSuccess\(isSuccess)")
+            self.dissmissVC()
+        }
     }
+}
+
+extension FinishGoalVC {
+    
+    func addGoal(compleHandler : @escaping (_ compltion: Bool)->Void) {
+        guard let managedObject = appDelegate?.persistentContainer.viewContext else {return}
+        let goal = Goal(context: managedObject)
+        goal.goalDescription = goalDescription
+        goal.goalTatalProgress = Int32(goalPointField.text!)!
+        goal.goalProgress  = Int32(0)
+        goal.goalType = goalType
+        do{
+           try managedObject.save()
+            compleHandler(true)
+        }catch{
+            compleHandler(false)
+            debugPrint("add data error \(error.localizedDescription)")
+        }
+    }
+    
+
 }

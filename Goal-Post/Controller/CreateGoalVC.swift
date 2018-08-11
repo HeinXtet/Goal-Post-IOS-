@@ -35,14 +35,13 @@ class CreateGoalVC: UIViewController , UITextViewDelegate {
         guard postField.text != "" , postField.text != "What is your goal?" else {
             return
         }
-        
         let finishVC = storyboard?.instantiateViewController(withIdentifier: "finishGoalVC") as! FinishGoalVC
         finishVC.setData(description: goalStr, goalType: goalType)
-        present(finishVC, animated: true, completion: nil)
+        presentingViewController? .presentToViewController(vc: finishVC)
     }
    
     @IBAction func backBtnPrssed(_ sender : Any){
-        self.dismiss(animated: true, completion: nil)
+        self.dissmissVC()
     }
     
     @IBAction func longTermBtnPressed(_ sender : Any){

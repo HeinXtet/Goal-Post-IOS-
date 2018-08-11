@@ -11,9 +11,10 @@ import UIKit
 extension UIButton{
     
     func selectedBgColor() {
-        self.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0, green: 0.6941176471, blue: 0.7843137255, alpha: 1)
     }
     func unSelectedBgColor() {
-        self.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.4509803922, green: 0.8274509804, blue: 0.8392156863, alpha: 1)
     }
 }
+

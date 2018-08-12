@@ -13,36 +13,46 @@ import CoreData
 
 
 class GoalVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
-
-    var goal = [Goal]()
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
-
+    @IBOutlet weak var undoView: UIView!
     @IBOutlet weak var goalMessageView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
+    private var tempIndexPath : IndexPath?
+    private var tempGoal : Goal?
+    private var undoExits = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.fetchGoal { (isSuccess) in
-            print("Fetching Success \(self.goal.count)")
-            self.tableView.reloadData()
-            if (self.goal.count == 0){
-                self.tableView.isHidden = true
-            }else{
-                self.tableView.isHidden = false
-
-            }
+    private func removeTempGoal(){
+        if (self.undoExits){
+            CoreDataService.instance.removeData(index : tempGoal!, completionHander: { (isSuccess) in
+                if (isSuccess){
+                    self.fetchCoreGoal()
+                    self.undoExits = false
+                }
+            })
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchCoreGoal()
+    }
 
+    @IBAction func undoPressed(_ sender: Any) {
+        undoExits = false
+        CoreDataService.instance.goal.insert(tempGoal!, at: tempIndexPath!.row)
+        self.tableView.insertRows(at: [tempIndexPath!], with: .automatic)
+        self.undoView.isHidden = true
+        self.undoExits = false
 
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "GoalPostCell", for: indexPath) as? GoalCell{
-            cell.updateCell(goal: goal[indexPath.row])
+            cell.updateCell(goal: CoreDataService.instance.goal[indexPath.row])
             return cell
         }
         return GoalCell()
@@ -54,14 +64,70 @@ class GoalVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return goal.count
+        return CoreDataService.instance.goal.count
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        if undoExits {
+            removeTempGoal()
+        }
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "DELETE") { action, index in
+           self.undoView.isHidden = false
+            self.tempIndexPath = indexPath
+            print("delete index \(self.tempIndexPath!.row)")
+            self.undoExits = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                self.undoView.isHidden = true
+                self.removeTempGoal()
+            }
+            self.tempGoal = CoreDataService.instance.goal[indexPath.row]
+            CoreDataService.instance.goal.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        delete.backgroundColor = UIColor.red
+        let addProgress = UITableViewRowAction(style: .normal, title: "ADD") { (action, index) in
+            CoreDataService.instance.setProgress(index: indexPath.row, completion: { (isSuccess) in
+                if isSuccess{
+                    self.tableView.reloadRows(at: [indexPath], with: .fade)
+                }
+            })
+        }
+        addProgress.backgroundColor = UIColor.orange
+        return [delete,addProgress]
+    }
+    
+    
+    private func fetchCoreGoal(){
+        CoreDataService.instance.fetchGoals { (isSuccess) in
+            if (isSuccess){
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                print("fetch success \(CoreDataService.instance.goal.count)")
+                if (CoreDataService.instance.goal.count == 0){
+                    self.tableView.isHidden = true
+                }else{
+                    self.tableView.isHidden = false
+                    
+                }
+            }
+            
+        }
+    }
+
 
     private func setUpView(){
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
+        self.undoView.isHidden = true
     }
     
     @IBAction func createGoalPost(_ sender: Any) {
@@ -70,34 +136,4 @@ class GoalVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-
-extension GoalVC {
-    
-    func fetchGoal(completionHandler : @escaping (_ completion : Bool)->Void) {
-        guard let managedContext =  appDelegate?.persistentContainer.viewContext else {
-            return
-        }
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
-        
-        do {
-            goal = try managedContext.fetch(fetchRequest) as! [Goal]
-            completionHandler(true)
-        }catch{
-            completionHandler(false)
-            debugPrint("fetch Request error  \(error.localizedDescription)")
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
 

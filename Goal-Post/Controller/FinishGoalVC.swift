@@ -35,15 +35,13 @@ class FinishGoalVC: UIViewController {
     }
     
     @IBAction func finishGoalVC(_ sender: Any) {
-        addGoal { (isSuccess) in
-            print("isSuccess\(isSuccess)")
+        self.addGoal { (isSuccess) in
             self.dissmissVC()
         }
     }
 }
 
 extension FinishGoalVC {
-    
     func addGoal(compleHandler : @escaping (_ compltion: Bool)->Void) {
         guard let managedObject = appDelegate?.persistentContainer.viewContext else {return}
         let goal = Goal(context: managedObject)
@@ -53,6 +51,7 @@ extension FinishGoalVC {
         goal.goalType = goalType
         do{
            try managedObject.save()
+            debugPrint("success save ")
             compleHandler(true)
         }catch{
             compleHandler(false)

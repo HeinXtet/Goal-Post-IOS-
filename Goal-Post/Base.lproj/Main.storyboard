@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -130,16 +131,36 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcK-Ci-4Ma" userLabel="GoalCompletionView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="411-AR-vKC">
+                                                            <rect key="frame" x="81.5" y="14" width="212.5" height="41"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="30"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="0.43858506940000003" blue="0.023057725689999999" alpha="0.75" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="411-AR-vKC" firstAttribute="centerX" secondItem="KcK-Ci-4Ma" secondAttribute="centerX" id="GR6-kq-28d"/>
+                                                        <constraint firstItem="411-AR-vKC" firstAttribute="centerY" secondItem="KcK-Ci-4Ma" secondAttribute="centerY" id="wgt-WX-HJy"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="t0W-6i-fdQ" secondAttribute="bottom" constant="6" id="4cH-j5-sqo"/>
+                                                <constraint firstItem="KcK-Ci-4Ma" firstAttribute="leading" secondItem="3Ik-ZD-DTD" secondAttribute="leading" id="8OM-md-2NA"/>
                                                 <constraint firstItem="7SD-Rs-acJ" firstAttribute="top" secondItem="3Ik-ZD-DTD" secondAttribute="top" constant="8" id="8rh-1C-L2M"/>
                                                 <constraint firstItem="sZV-nn-SZy" firstAttribute="top" secondItem="3Ik-ZD-DTD" secondAttribute="top" constant="8" id="CIF-f2-E8c"/>
                                                 <constraint firstItem="t0W-6i-fdQ" firstAttribute="top" secondItem="7SD-Rs-acJ" secondAttribute="bottom" constant="11" id="DZT-1V-ejI"/>
                                                 <constraint firstItem="sZV-nn-SZy" firstAttribute="leading" secondItem="3Ik-ZD-DTD" secondAttribute="leading" constant="8" id="LDk-Ae-Krw"/>
                                                 <constraint firstAttribute="trailing" secondItem="S5h-Jk-1aG" secondAttribute="trailing" constant="8" id="S6A-Uw-TbY"/>
                                                 <constraint firstItem="7SD-Rs-acJ" firstAttribute="leading" secondItem="sZV-nn-SZy" secondAttribute="trailing" constant="8" id="bGe-9L-AZ9"/>
+                                                <constraint firstAttribute="trailing" secondItem="KcK-Ci-4Ma" secondAttribute="trailing" id="bed-zX-Mam"/>
                                                 <constraint firstAttribute="bottom" secondItem="S5h-Jk-1aG" secondAttribute="bottom" constant="8" id="bsM-aS-7UH"/>
+                                                <constraint firstItem="KcK-Ci-4Ma" firstAttribute="top" secondItem="3Ik-ZD-DTD" secondAttribute="top" id="cTS-x0-aQM"/>
+                                                <constraint firstAttribute="bottom" secondItem="KcK-Ci-4Ma" secondAttribute="bottom" id="din-vG-Emm"/>
                                                 <constraint firstAttribute="trailing" secondItem="t0W-6i-fdQ" secondAttribute="trailing" constant="8" id="f0p-7h-WiR"/>
                                                 <constraint firstItem="S5h-Jk-1aG" firstAttribute="top" secondItem="3Ik-ZD-DTD" secondAttribute="top" constant="8" id="gBT-pL-Jj5"/>
                                                 <constraint firstItem="t0W-6i-fdQ" firstAttribute="leading" secondItem="3Ik-ZD-DTD" secondAttribute="leading" constant="8" id="iYb-uW-h5z"/>
@@ -148,6 +169,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="goalCompletionView" destination="KcK-Ci-4Ma" id="shY-KS-eES"/>
                                             <outlet property="goalLable" destination="7SD-Rs-acJ" id="eMp-ze-bpt"/>
                                             <outlet property="goalProgress" destination="S5h-Jk-1aG" id="TKD-us-lgh"/>
                                             <outlet property="goalType" destination="LAV-a6-u82" id="4IA-kU-5Tp"/>
@@ -155,23 +177,58 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JuX-iG-eUk" userLabel="UndoView">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Removed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKU-Fi-pl1">
+                                        <rect key="frame" x="16" y="18" width="153" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="MIc-MY-fZu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LlW-8x-u3E">
+                                        <rect key="frame" x="315" y="15.5" width="44" height="30"/>
+                                        <state key="normal" title="UNDO">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="undoPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WEV-UM-dfw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.39588758680555558" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="LlW-8x-u3E" secondAttribute="trailing" constant="16" id="KvX-Bu-C1T"/>
+                                    <constraint firstItem="EKU-Fi-pl1" firstAttribute="centerY" secondItem="JuX-iG-eUk" secondAttribute="centerY" id="NcR-BI-oUH"/>
+                                    <constraint firstAttribute="height" constant="60" id="V2X-MN-RN3"/>
+                                    <constraint firstItem="LlW-8x-u3E" firstAttribute="centerY" secondItem="EKU-Fi-pl1" secondAttribute="centerY" id="bAG-2G-ucb"/>
+                                    <constraint firstItem="EKU-Fi-pl1" firstAttribute="leading" secondItem="JuX-iG-eUk" secondAttribute="leading" constant="16" id="jiY-38-vbs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5NP-6V-SWy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2fV-EP-DFy"/>
                             <constraint firstItem="5NP-6V-SWy" firstAttribute="top" secondItem="Y7c-7M-vku" secondAttribute="bottom" constant="76" id="35K-8s-yuN"/>
+                            <constraint firstItem="JuX-iG-eUk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6Ib-oR-Qt0"/>
                             <constraint firstItem="cXQ-EZ-I3k" firstAttribute="top" secondItem="Y7c-7M-vku" secondAttribute="bottom" id="8VS-LX-JMB"/>
                             <constraint firstItem="Y7c-7M-vku" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Fdf-lh-cAL"/>
                             <constraint firstItem="cXQ-EZ-I3k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GUe-Ht-YKw"/>
                             <constraint firstItem="cXQ-EZ-I3k" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OW2-dA-F1n"/>
                             <constraint firstItem="Y7c-7M-vku" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RH9-Qn-Ghi"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="JuX-iG-eUk" secondAttribute="bottom" id="gXI-ID-lEW"/>
                             <constraint firstItem="cXQ-EZ-I3k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="k8c-ZI-Y72"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JuX-iG-eUk" secondAttribute="trailing" id="sa6-jt-pdk"/>
                             <constraint firstItem="Y7c-7M-vku" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tXY-u4-Sm1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="cXQ-EZ-I3k" id="3AQ-z4-aSa"/>
+                        <outlet property="undoView" destination="JuX-iG-eUk" id="zXQ-OI-djW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE10478E211FEB00008C9704 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10478D211FEB00008C9704 /* CoreDataService.swift */; };
 		EE10C13F211E8B5500C8FC79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10C13E211E8B5500C8FC79 /* AppDelegate.swift */; };
 		EE10C141211E8B5500C8FC79 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE10C140211E8B5500C8FC79 /* GoalVC.swift */; };
 		EE10C144211E8B5500C8FC79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE10C142211E8B5500C8FC79 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE10478D211FEB00008C9704 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		EE10C13B211E8B5500C8FC79 /* Goal-Post.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Goal-Post.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE10C13E211E8B5500C8FC79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE10C140211E8B5500C8FC79 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				EE10C145211E8B5500C8FC79 /* Goal_Post.xcdatamodeld */,
+				EE10478D211FEB00008C9704 /* CoreDataService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				EE664075211F0FCA00AD968F /* Enum.swift in Sources */,
 				EE181144211F4F710093C408 /* ViewControllerExt.swift in Sources */,
 				EE10C147211E8B5500C8FC79 /* Goal_Post.xcdatamodeld in Sources */,
+				EE10478E211FEB00008C9704 /* CoreDataService.swift in Sources */,
 				EE66407B211F2A4700AD968F /* UIButtonExt.swift in Sources */,
 				EE66407D211F2D0100AD968F /* FinishGoalVC.swift in Sources */,
 			);
